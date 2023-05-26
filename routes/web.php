@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +16,15 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('index');
 });
 
-Route::get('/regis',[AuthController::class,'regis']);
+Route::get('/regis',[AuthController::class,'regis'])->name('regis');
 Route::post('/signup',[AuthController::class,'AUTHRegis'])->name('signup');
-Route::get('/login',[AuthController::class,'login']);
+Route::get('/login',[AuthController::class,'login'])->name('login');
 Route::post('/verif',[AuthController::class,'AUTHLogin'])->name('verif');
+
+Route::resource('admin',UserController::class);
 
 Route::middleware(['auth'])->group(function () {
     //

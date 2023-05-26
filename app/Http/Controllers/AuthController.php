@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -27,6 +29,15 @@ class AuthController extends Controller
             $req->session()->regenerate();
  
             return redirect()->intended('index');
+            if (Auth::check()) {
+                $user = Auth::user();
+        
+                if ($user->role === 'admin') {
+                    return redirect()->intended('admin.dashboard');
+                } else {
+                    return redirect()->intended('index');
+                }
+            }
         }
  
         return back()->withErrors([
@@ -39,7 +50,7 @@ class AuthController extends Controller
      */
     public function regis()
     {
-        return view('auht/regis');
+        return view('auth/regis');
     }
 
     /**
@@ -52,11 +63,17 @@ class AuthController extends Controller
             'username' => 'required',
             'email' => 'required|email',
             'telp' => 'required',
+            'alamat' => 'required',
             'password' => 'required',
         ]);
-        $validated['password'] = Hash::make($validated['pass']);
+        $validated['password'] = Hash::make($validated['password']);
         User::create($request->all());
      
-        return redirect()->route('index')->with('success','user created successfully.');
+        return redirect()->intended('index')->with('success','user created successfully.');
+    }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

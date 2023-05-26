@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('username');
             $table->string('email')->unique();
-            $table->longText('address');
-            $table->integer('telp')->value(20);
+            $table->longText('alamat');
+            $table->string('telp');
             $table->string('password');
+            $table->string('role')->default('user');
             $table->rememberToken();
         });
     }

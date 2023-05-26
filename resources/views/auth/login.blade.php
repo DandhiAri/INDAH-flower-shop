@@ -8,14 +8,34 @@
     <link rel="stylesheet" href="comp/auth/auth-style.css">
 </head>
 <body>
-    <center>
-        <form action="{{route('verif')}}" method="post">
-            <label for="username"> Username</label>
-            <input type="text" name="username">
-            <label for="Password"> Password</label>
-            <input type="password" name="password"><br>
-            <input type="submit" value="submit">
-        </form>
-    </center>
+    <form action="{{route('verif')}}" method="post">
+        @csrf       
+        <ul style="padding-top:10%">
+            <li>
+                <img src="{{ asset('/img/indah putih.png') }}" alt="logo" width="90%">
+            </li>
+            <li style="padding-top:10%">
+                <label for="username"> Username</label>
+            </li>
+            <li>
+                <input type="text" name="username" placeholder="masukkan username anda">
+            </li>
+            <li>
+                <label for="Password"> Password</label>
+            </li>
+            <li>
+                <input type="password" name="password" placeholder="masukkan password anda">
+            </li>
+            <li style="display:flex; justify-content:center; padding-top:10px; margin-left:-30px;" >
+                <input type="submit" value="MASUK">
+            </li>
+            {{-- <li class="lupa" style="display:flex; justify-content:center;">
+                <a href="" >Lupa Password?</a>
+            </li> --}}
+            <li style="display:flex; justify-content:center; padding-top:10px; margin-left:-40px;">
+                Belom punya akun?<a href="{{ route('regis') }}" >coba signup</a>
+            </li>
+        </ul>
+    </form>
 </body>
 </html>
