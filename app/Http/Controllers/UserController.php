@@ -15,15 +15,19 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
-        return view('admin/index',compact('user'));
+        return view('admin.user.index',compact('user'));
     }
-
+    
+    public function profile(){
+        $user = User::find(auth()->user()->id);
+        return view('pages.user-page',compact('user'));
+    }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('admin/create');
+        return view('admin/user/create');
     }
 
     /**
@@ -59,7 +63,7 @@ class UserController extends Controller
     {
         // return('halo');
         $user = User::find($id);
-        return view('admin/edit',compact('user'));
+        return view('admin/user/edit',compact('user'));
     }
 
     /**

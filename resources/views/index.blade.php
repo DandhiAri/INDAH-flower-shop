@@ -23,35 +23,18 @@
                 </div>
             </div> --}}
             <div class="category-list">
-                <a class="category" href="">
-                    <img src="/img/cate/bonsai2.png" alt="img-cate">
+                @foreach ($products as $item)
+                <a class="category" href="{{ route('product',['slug'=>$item->slug]) }}" style="100px">
+                    <img src="/img/product/{{ $item->image }}" alt="{{ $item->image }}" style="height:150px;">
                     <div class="cate-title">
-                        category-title
+                        {{ $item->name }}
                     </div>
                 </a>
-                <a class="category" href="">
-                    <img src="/img/cate/bonsai2.png" alt="img-cate">
-                    <div class="cate-title">
-                        category-title
-                    </div>
-                </a>
-                <a class="category" href="">
-                    <img src="/img/cate/bonsai2.png" alt="img-cate">
-                    <div class="cate-title">
-                        category-title
-                    </div>
-                </a>
-                <a class="category" href="">
-                    <img src="/img/cate/bonsai2.png" alt="img-cate">
-                    <div class="cate-title">
-                        category-title
-                    </div>
-                </a>
-                <a class="category" href="">
-                    <img src="/img/cate/bonsai2.png" alt="img-cate">
-                    <div class="cate-title">
-                        category-title
-                    </div>
+                @endforeach
+            </div>
+            <div class="button-link-shop">
+                <a href="/shop" >
+                    AYO BELANJA SEKARANG 
                 </a>
             </div>
         </div>
@@ -76,7 +59,7 @@
                 <div class="promosi-text">
                     BELANJA ONLINE SEKARANG & DAPATKAN DISKON 10%
                 </div>
-                <a href="" class="button-promosi">BELI SEKARANG</a>
+                <a href="{{ route('shop') }}" class="button-promosi">BELI SEKARANG</a>
             </div>
     </section>
     <section id="contact-us-section">

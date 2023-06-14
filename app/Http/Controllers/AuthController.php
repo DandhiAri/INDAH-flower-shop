@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -28,14 +29,12 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $req->session()->regenerate();
  
-            return redirect()->intended('index');
             if (Auth::check()) {
                 $user = Auth::user();
-        
                 if ($user->role === 'admin') {
-                    return redirect()->intended('admin.dashboard');
+                    return redirect()->intended('/admin');
                 } else {
-                    return redirect()->intended('index');
+                    return redirect()->route('index');
                 }
             }
         }
@@ -69,11 +68,11 @@ class AuthController extends Controller
         $validated['password'] = Hash::make($validated['password']);
         User::create($request->all());
      
-        return redirect()->intended('index')->with('success','user created successfully.');
+        return redirect()->intended('admin')->with('success','user created successfully.');
     }
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('index');
     }
 }

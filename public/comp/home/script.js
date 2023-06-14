@@ -13,7 +13,6 @@ nextBtn.addEventListener('click', () => {
   slideIndex = (slideIndex + 1) % 2; // Adjust the number based on the number of slides
   slider.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
 });
-
 // window.addEventListener('load', function() {
 //     // Perform any necessary backend operations here
     
