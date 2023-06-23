@@ -37,15 +37,16 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required',
-            'user' => 'required',
+            'username' => 'required',
             'email' => 'required|email',
-            'pass' => 'required',
-
+            'password' => 'required',
+            'alamat' => 'required',
+            'telp' => 'required',
         ]);
-        $validated['pass'] = Hash::make($validated['pass']);
+        // $validated['pass'] = Hash::make($validated['pass']);
         User::create($request->all());
      
-        return redirect()->route('index')->with('success','user created successfully.');
+        return redirect()->route('useradmin.index')->with('success','user created successfully.');
     }
 
     /**
@@ -74,16 +75,17 @@ class UserController extends Controller
         $user = User::find($id);
         $validated = $request->validate([
             'name' => 'required',
-            'user' => 'required',
+            'username' => 'required',
             'email' => 'required|email',
-            'pass' => 'required',
-
+            'password' => 'required',
+            'alamat' => 'required',
+            'telp' => 'required',
         ]);
-        $validated['pass'] = Hash::make($validated['pass']);
+        $validated['password'] = Hash::make($validated['password']);
         
         $user->update($request->all());
     
-        return redirect()->route('admin.index')->with('success','user updated successfully');
+        return redirect()->route('useradmin.index')->with('success','user updated successfully');
     }
 
     /**
@@ -92,7 +94,7 @@ class UserController extends Controller
     public function destroy(User $user,string $id)
     {
         User::destroy($id);
-        return redirect()->route('admin.index')->with('success','user deleted successfully');
+        return redirect()->route('useradmin.index')->with('success','user deleted successfully');
         
     }
 }

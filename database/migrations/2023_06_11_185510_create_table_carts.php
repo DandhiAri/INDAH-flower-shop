@@ -16,7 +16,9 @@ return new class extends Migration
             $table->foreignId('product_id');
             $table->integer('quantity');
             $table->foreignId('user_id');
-            $table->integer('subtotal',)->default(0);
+            $table->integer('subtotal')->default(0);
+            $table->integer('card_id')->nullable();
+
             // $table->integer('total',)->default(0);
             $table->timestamps();
 

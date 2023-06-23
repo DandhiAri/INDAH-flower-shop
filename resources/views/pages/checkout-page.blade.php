@@ -130,6 +130,22 @@ module.exports = {
                                 <span class="font-semibold">Rp.{{ $cartall }}</span>
                             </div>
                         </div>
+                        {{-- <div class="w-full flex mb-3 items-center">
+                            <div class="flex-grow">
+                                <span class="text-gray-600">Uang mu</span>
+                            </div>
+                            <div class="pl-3">
+                                <span class="font-semibold">Rp.{{ $cartall }}</span>
+                            </div>
+                        </div>
+                        <div class="w-full flex mb-3 items-center">
+                            <div class="flex-grow">
+                                <span class="text-gray-600">Kembalian</span>
+                            </div>
+                            <div class="pl-3">
+                                <span class="font-semibold">Rp.{{ $cartall }}</span>
+                            </div>
+                        </div> --}}
                         <div class="w-full flex items-center">
                             <div class="flex-grow">
                                 <span class="text-gray-600">Ongkir</span>
@@ -138,14 +154,16 @@ module.exports = {
                                 <span class="font-semibold">Rp.14000</span>
                             </div>
                         </div>
+                        
                     </div>
+                    
                     <div class="mb-6 pb-6 border-b border-gray-200 md:border-none text-gray-800 text-xl">
                         <div class="w-full flex items-center">
                             <div class="flex-grow">
                                 <span class="text-gray-600">Total</span>
                             </div>
                             <div class="pl-3">
-                                <span class="font-semibold">Rp.{{ $cartall + 14000 }}</span>
+                                <span class="font-semibold">Rp.{{ $totalPrice = $cartall + 14000 }}</span>
                             </div>
                         </div>
                     </div>
@@ -173,11 +191,11 @@ module.exports = {
                         <div class="w-full p-3 border-b border-gray-200">
                             <div class="mb-5">
                                 <label for="type1" class="flex items-center cursor-pointer">
-                                    <a href="/checkout/card" style="cursor: pointer; background-color:red" >
+                                    {{-- <a href="/checkout/card" style="cursor: pointer; background-color:red" >
                                         <button type="button" class="inline-block rounded bg-danger px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#dc4c64] transition duration-150 ease-in-out hover:bg-danger-600 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-danger-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-danger-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(220,76,100,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]">
                                             VAYAR CARD
                                         </button>
-                                    </a>
+                                    </a> --}}
                                     <a href="/checkout/cod"  style="cursor: pointer; background-color:blue">
                                         <button type="button" class="inline-block rounded bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#e4a11b] transition duration-150 ease-in-out hover:bg-warning-600 hover:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] focus:bg-warning-600 focus:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] focus:outline-none focus:ring-0 active:bg-warning-700 active:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(228,161,27,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)]">
                                             COD
@@ -188,19 +206,22 @@ module.exports = {
                             </div>
                             <div>
                                 @if(Route::currentRouteName() == 'checkout.card')
-                                    <form action="" method="post">
+                                    <form action="{{ route('insertCard',$cart->id) }}" method="post">
+                                        @csrf
+                                        @method('PUT')
                                         <div class="mb-3">
                                             <label class="text-gray-600 font-semibold text-sm mb-2 ml-1">Nama Kartu VAYAR</label>
                                             <div>
-                                                <input class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="masukkan username VAYAR card anda..." type="text"/>
+                                                <input name="name" class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="masukkan username VAYAR card anda..." type="text"/>
                                             </div>
                                         </div>
                                         <div class="mb-3">
                                             <label class="text-gray-600 font-semibold text-sm mb-2 ml-1">Nomer Kartu VAYAR</label>
                                             <div>
-                                                <input class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="masukkan nomer kode VAYAR card anda.." type="text"/>
+                                                <input name="codeNumber" class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="masukkan nomer kode VAYAR card anda.." type="text"/>
                                             </div>
                                         </div>
+                                        <input class=" block w-full max-w-xs mx-auto hover:bg-green-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-2 font-semibold" type="submit" value="Masukkan Data Akun">
                                     </form>
                                 @endif
                             </div>
@@ -209,7 +230,23 @@ module.exports = {
                         </div>
                     </div>
                     <div>
-                        <button class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-2 font-semibold"><i class="mdi mdi-lock-outline mr-1"></i> PAY NOW</button>
+                        <form action="{{ route('addtoCo') }}" method="post">
+                            @csrf
+                            @foreach ($barang as $item)
+
+                                <input type="hidden" name="product_id" value="{{ $item->product_id }}">
+                                <input type="hidden" name="quantity" value="{{ $item->quantity }}">
+                                <input type="hidden" name="subtotal" value="{{ $item->subtotal }}">
+                            @endforeach
+                            <input type="hidden" name="total" value="{{ $totalPrice }}">
+
+                            <button type="submit" class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-2 font-semibold">
+                                <i class="mdi mdi-lock-outline mr-1"></i> BELI
+                            </button>
+                           
+                            
+                        </form>
+                        
                     </div>
                 </div>
             </div>

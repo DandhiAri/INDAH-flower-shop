@@ -7,7 +7,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -25,23 +24,24 @@ class AuthController extends Controller
             'username' => ['required'],
             'password' => ['required'],
         ]);
- 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) { 
+            
             $req->session()->regenerate();
  
             if (Auth::check()) {
                 $user = Auth::user();
                 if ($user->role === 'admin') {
-                    return redirect()->intended('/admin');
+                    return redirect()->intended('admin');
                 } else {
                     return redirect()->route('index');
                 }
             }
+        }else{
+            return back()->withErrors([
+                'username' => 'The provided credentials do not match our records.',
+            ])->onlyInput('username');
         }
- 
-        return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.',
-        ])->onlyInput('username');
+        
     }
 
     /**
@@ -57,6 +57,7 @@ class AuthController extends Controller
      */
     public function AUTHRegis(Request $request)
     {
+        // $user = new User();
         $validated = $request->validate([
             'name' => 'required',
             'username' => 'required',
@@ -66,9 +67,15 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
         $validated['password'] = Hash::make($validated['password']);
-        User::create($request->all());
-     
-        return redirect()->intended('admin')->with('success','user created successfully.');
+        // $user->password = bcrypt($request->password);
+        // $request->password = Hash::make($request->password);
+        $res = User::create($request->all());
+        if($res){
+            // dd($res);
+            return redirect()->intended('/login')->with('success','user created successfully.');
+        }else{
+            dd($res);
+        }
     }
     public function logout()
     {

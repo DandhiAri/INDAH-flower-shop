@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Livewire\CartComponent;
 use App\Models\Product;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,22 +42,25 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/cart',[CartController::class,'cart'])->name('cart');
     Route::delete('/cart/{id}',[CartController::class,'destroy'])->name('cart.destroy');
     Route::put('/cart/{id}',[CartController::class,'update'])->name('cart.update');
-    Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout');
+    Route::get('/checkout',[CheckoutController::class,'cart'])->name('checkout');
     Route::get('/checkout/card',[CheckoutController::class,'index'])->name('checkout.card');
     Route::get('/checkout/cod',[CheckoutController::class,'index'])->name('checkout.cod');
-    Route::get('/status',[ProductController::class,'status']);
+    Route::post('/addtoco',[CheckoutController::class,'addtoCo'])->name('addtoCo');
+    Route::get('/status',[CheckoutController::class,'status'])->name('status');
+    Route::post('/addtopay',[PaymentController::class,'addtopay'])->name('addtopay');
+    Route::post('/checkout/card/insertCard',[CheckoutController::class,'insertCard'])->name('insertCard');
     Route::put('/cartupdate/{id}',[Cartcontroller::class,'updateCart'])->name('cartupdate');
     Route::delete('/removeCart/{id}',[Cartcontroller::class,'removeCart'])->name('removeCart');
     // Route::get('/cartcount', [CartController::class, 'count'])->name('cart.count')->redirect('/');
+    route::put('/pfpupdate',[UserController::class,'pfpupdate'])->name('pfpupdate');
 });
-
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
-
 Route::middleware(['admin','auth'])->group(function () {
-    Route::view('/admin','layout.main')->name('admin');
+    Route::view('admin','layout.main')->name('admin');
     Route::resource('useradmin',UserController::class);
     Route::resource('cartadmin',CartController::class);
-    Route::resource('productadmin', UserController::class);
+    Route::resource('productadmin', ProductController::class);
+    Route::resource('checkoutadmin',CheckoutController::class);
 });
 
 

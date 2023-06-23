@@ -76,12 +76,13 @@
                 </div>
             </div>
         @else
-        <div class="rounded-lg md:w-2/3" style="display: grid; place-items:center; text-align :center;">
+        <div class="rounded-lg md:w-3/3" style="display: grid; place-items:center; text-align :center;">
           KERANJANG KAMU MASIH KOSONG!
           <a href="/shop" class="lanjut-shop">Lanjut Belanja</a>
         </div>
         @endif
       <!-- Sub total -->
+      @if (count($carts) > 0)
       <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
         {{-- <div class="mb-2 flex justify-between">
           <p class="text-gray-700">Subtotal</p>
@@ -100,16 +101,14 @@
             {{-- <p class="text-sm text-gray-700">including VAT</p> --}}
           </div>
         </div>
+        
         <a href="{{ route('checkout') }}">
-          <button class="mt-4 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>
+          <button  class="mt-4 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>
         </a>
-        <form action="{{ route('checkout') }}" method="get">
+        @else
 
-          {{-- <input type="hidden" value="{{ $cart->product }}">
-          <input type="hidden" value="{{ $total }}" name="total"> --}}
-          {{-- <button type="submit" class="mt-6 w-full rounded-md bg-yellow-500 py-1.5 font-medium text-blue-50 hover:bg-green-600">Update</button> --}}
-          
-        </form>
+        @endif
+      
       </div>
     </div>
   </div>

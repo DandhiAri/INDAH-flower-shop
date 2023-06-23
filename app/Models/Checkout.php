@@ -13,12 +13,13 @@ class Checkout extends Model
     protected $table = 'checkouts';
 
     public function user(){
-        return $this->belongsTo(Checkout::class);
+        return $this->belongsTo(User::class);
     }
     public function payment(){
-        return $this->hasMany(Checkout::class);
+        return $this->hasMany(Payment::class);
     }
-    public function checkout(){
-        return $this->hasMany(Checkout::class);
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 }

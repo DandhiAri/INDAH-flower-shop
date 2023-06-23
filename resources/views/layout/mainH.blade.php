@@ -36,6 +36,11 @@
                                 Profil User
                             </div>
                         </a>
+                        <a href="{{ route('checkout') }}">
+                            <div class="dropdown-child">
+                                Checkout
+                            </div>
+                        </a>
                         @if ( auth()->user()->isAdmin())
                             <a href="{{ route('admin') }}">
                                 <div class="dropdown-child">
@@ -43,7 +48,7 @@
                                 </div>
                             </a>
                         @endif
-                        <a href="">
+                        <a href="{{ route('status') }}">
                             <div class="dropdown-child">
                                 Status Barang
                             </div>

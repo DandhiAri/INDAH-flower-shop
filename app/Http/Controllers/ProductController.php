@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -20,12 +21,17 @@ class ProductController extends Controller
         $product = Product::where('slug', $slug)->firstOrFail();
         return view('pages.product-page',compact('product'));
     }
+    public function index()
+    {
+        $product = Product::all();
+        return view('admin.product.index',compact('product'));
+    }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('admin.product.create');
     }
 
     /**
@@ -33,7 +39,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = $request->validate([
+            'name' => 'required',
+            'category' => 'required',
+            'image' => 'required',
+            'desc' => 'required',
+            'stock' => 'required',
+            'size' => 'required',
+            'price' => 'required',
+        ]);
+        Product::create($request->all());
+     
+        return redirect()->route('productadmin.index')->with('success','user created successfully.');
     }
 
     /**
@@ -49,7 +67,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $prod = Product::find($id);
+        return view('admin.product.edit',compact('prod'));
     }
 
     /**
@@ -57,7 +76,20 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = Product::find($id);
+        $validated = $request->validate([
+            'name' => 'required',
+            'category' => 'required',
+            'slug' => 'required',
+            'image' => 'required',
+            'desc' => 'required',
+            'stock' => 'required',
+            'size' => 'required',
+            'price' => 'required',
+        ]);
+        $product->update($request->all());
+     
+        return redirect()->route('productadmin.index')->with('success','user created successfully.');
     }
 
     /**
@@ -65,6 +97,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Product::destroy($id);
+        return redirect()->route('productadmin.index')->with('success','user deleted successfully');
     }
 }

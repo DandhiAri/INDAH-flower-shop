@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use App\Models\Card;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'dandhiari22',
             'telp' => '082141794129',
             'alamat' => 'semboro',
-            'password' => Hash::make('awokawok'),
+            'password' => 'awokawok',
             'email' => 'dandhiari@null.com',
             'role' => 'admin',
         ]);
@@ -36,10 +37,17 @@ class DatabaseSeeder extends Seeder
             'username' => 'arilassoKW',
             'telp' => '08123456789',
             'alamat' => fake()->address,
-            'password' => Hash::make('1234'),
+            'password' => 'awokawok',
             'email' => 'arilasso@null.com',
             'role' => 'user',
         ]);
+        
+        Card::create([
+            'name' => 'dandhi ari',
+            'codeNumber' => '08123456789',
+            'value' => 2000000
+        ]);
+
         for($i = 1; $i <= 10; $i++){
             User::factory()->create([
               'name' => fake()->name,

@@ -15,10 +15,18 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('product_id');
-            $table->foreignId('payment_id');
+            $table->foreignId('payment_id')->default(0);
             $table->integer('quantity');
             $table->integer('totalPrice');
+            $table->string('codeSent')->unique();
+            $table->string('status')->default('menunggu pembayaran...');
+
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            // $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
+
         });
     }
 

@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cards', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('codeNumber');
-            $table->integer('value')->nullable();
+            $table->foreignId('card_id');
+            $table->foreignId('product_id');
+            $table->integer('quantity');
+            $table->integer('subtotal');
+            $table->integer('early_price');
+            $table->integer('total_price');
+            $table->integer('kembalian');
             $table->timestamps();
         });
+
     }
 
     /**
@@ -25,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cards');
+        Schema::dropIfExists('payments');
     }
 };

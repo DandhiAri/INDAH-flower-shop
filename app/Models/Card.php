@@ -12,4 +12,7 @@ class Card extends Model
     protected $guarded = ['id'];
     public $timestamps = true;
     protected $table = 'cards';
+    public function id(){
+        return Cart::get()->id;
+    }
 }

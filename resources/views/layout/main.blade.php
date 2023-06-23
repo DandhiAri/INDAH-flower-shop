@@ -26,7 +26,7 @@
 
     <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
         <div class="p-6">
-            <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin page </a>
+            <a href="{{ route('admin') }}" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin page </a>
             <a href="/">
                 <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
                     <i class="fas fa-home mr-3"></i> Retrun to Home
@@ -38,32 +38,20 @@
                 <i class="fas fa-user-alt mr-3"></i>
                 User
             </a>
-            <a href="" class="flex items-center text-white py-4 pl-6 nav-item">
+            <a href="{{ route('productadmin.index') }}" class="flex items-center text-white py-4 pl-6 nav-item">
                 <i class="fas fa-box mr-3"></i>
                 Product
             </a>
-            <a href="tables.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-table mr-3"></i>
-                Categories
-            </a>
-            <a href="forms.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-align-left mr-3"></i>
-                Cart
-            </a>
-            <a href="tabs.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-tablet-alt mr-3"></i>
+            <a href="{{ route('checkoutadmin.index') }}" class="flex items-center active-nav-link text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-cart mr-3"></i>
                 Checkout
-            </a>
-            <a href="calendar.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-calendar mr-3"></i>
-                Calendar
             </a>
         </nav>
     </aside>
 
     <div class="relative w-full flex flex-col h-screen overflow-y-hidden">
         <!-- Desktop Header -->
-        <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
+        {{-- <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
             <div class="w-1/2"></div>
             <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
                 <button @click="isOpen = !isOpen" class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
@@ -76,7 +64,7 @@
                     <a href="#" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
                 </div>
             </div>
-        </header>
+        </header> --}}
 
         <!-- Mobile Header & Nav -->
         <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">

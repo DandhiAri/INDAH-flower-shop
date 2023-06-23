@@ -16,6 +16,7 @@ class CartController extends Controller
      */
     public function cart(Request $request){
         $carts = Cart::where('user_id', auth()->id())->get();
+
         $cartall = Cart::sum('subtotal');
         return view('pages.cart-page', compact('carts','cartall'));
     }
